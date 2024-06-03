@@ -9,4 +9,23 @@
 - 이웃 포스트에 댓글 달기
 - 내 포스트에 달린 댓글에 대댓글 달기
 ## 사용법
+- pyenv 설치 및 가상환경 설정
+```bash
+curl https://pyenv.run | bash
+
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+source ~/.bashrc  # 또는 source ~/.zshrc
+
+pyenv install 3.12.2
+
+pyenv virtualenv 3.12.2 naver_blog_automation
+
+pyenv activate naver_blog_automation
+
+pyenv deactivate
+```
 - 추후 완성되면 정리
