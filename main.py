@@ -2,6 +2,7 @@ import yaml
 import time
 import pyperclip
 import platform
+import random
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -57,9 +58,34 @@ def naver_login(id, pw):
     login_btn.click()
 
 
+# 최신 feed link 추출
+# 무한 스크롤 기능 때문에 max count를 지정해줘야 한다
+def get_feed_urls(max_url_count):
+    get_feed_list()
+
+    links = []
+
+    driver.execute_script('window.scrollBy(0, 100000);')
+    time.sleep(random.uniform(1, 3))
+
+    urls = driver.find_elements(By.CLASS_NAME, 'link__Awlz5')
+    for url in urls:
+        links.append(url.get_attribute('href'))
+
+    links = list(set(links))
+        
+
+
+
+    for link in links:
+        print(f'url : {link}')
+
+
+
 # FeedList 화면 출력
 def get_feed_list():
     driver.get('http://m.blog.naver.com/FeedList.naver')
+
 
 if __name__ == "__main__":
     config_data = read_config('setting.yml')
@@ -68,7 +94,7 @@ if __name__ == "__main__":
 
     time.sleep(1)
 
-    get_feed_list()
+    get_feed_urls(100)
 
     input()
 
